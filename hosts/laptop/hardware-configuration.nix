@@ -47,7 +47,7 @@
       KEYBOARD_KEY_9d=ro
       KEYBOARD_KEY_29=yen
       KEYBOARD_KEY_db=leftalt
-  '';]]]]^^~
+  '';
 
   services.fprintd.enable = true;
   nixpkgs.overlays = [
