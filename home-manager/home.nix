@@ -45,7 +45,7 @@
             /u:"$USER" \
             /d:"$DOMAIN" \
             /gateway:g:"$GW" \
-            /f /kbd:layout:Japanese /kbd:remap:0x3a=0nixx64 /scale:140
+            /f /kbd:layout:Japanese /kbd:remap:0x3a=0x64 /scale:140
         )
       '';
     };
