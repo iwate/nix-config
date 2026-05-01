@@ -60,7 +60,6 @@
     rdp-work = {
       name = "RDP(work)";
       genericName = "Connect to workstation";
-      # 生成したスクリプトをフルパスで実行
       exec = "${pkgs.bash}/bin/bash -ic connect-work-rdp";
       terminal = false;
       categories = [ "Network" "RemoteAccess" ];
