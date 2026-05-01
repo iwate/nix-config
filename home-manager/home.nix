@@ -25,6 +25,7 @@
   home.file.".config/fcitx5/profile".source = ./dotfiles/fcitx5-profile;
   home.file.".config/mozc/config1.db".source = ./dotfiles/mozc-config1.db;
   home.file.".config/niri/config.kdl".source = ./dotfiles/niri-config.kdl;
+  home.file.".config/niri/config.kdl".force = true;
   home.file.".config/noctalia/colors.json".source = ./dotfiles/noctalia-colors.json;
   home.file.".config/noctalia/settings.json".source = ./dotfiles/noctalia-settings.json;
 

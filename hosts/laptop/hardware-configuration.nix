@@ -31,15 +31,23 @@
   hardware.graphics.enable = true;
   hardware.bluetooth.enable = true;
   
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "jp";
+    variant = "";
+  };
+
   services.udev.extraHwdb = ''
     # Input device ID: bus 0x11 vendor 0x1 product 0x1 Only
     evdev:input:b0011v0001p0001*
       KEYBOARD_KEY_3a=leftctrl
-      KEYBOARD_KEY_1d=compose
+      KEYBOARD_KEY_1d=capslock
       KEYBOARD_KEY_38=muhenkan
       KEYBOARD_KEY_b8=henkan
-      KEYBOARD_KEY_9d=leftalt
-  '';
+      KEYBOARD_KEY_9d=ro
+      KEYBOARD_KEY_29=yen
+      KEYBOARD_KEY_db=leftalt
+  '';]]]]^^~
 
   services.fprintd.enable = true;
   nixpkgs.overlays = [

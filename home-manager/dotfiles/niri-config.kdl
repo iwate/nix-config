@@ -19,8 +19,8 @@ input {
             // For more information, see xkeyboard-config(7).
 
             // For example:
-            layout "jp,us"
-            options "grp:win_space_toggle,lv5:menu_switch"
+            layout "jp"
+            options "lv5:caps_switch"
 
             // If this section is empty, niri will fetch xkb settings
             // from org.freedesktop.locale1. You can control these using
