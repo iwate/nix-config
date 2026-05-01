@@ -117,6 +117,11 @@
   #   enableSSHSupport = true;
   # };
   programs.niri.enable = true;
+
+  # gnome-keyring (VSCodeのGitHub認証情報保存に必要)
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.sddm.enableGnomeKeyring = true;
+
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;

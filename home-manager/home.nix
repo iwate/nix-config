@@ -73,6 +73,12 @@ in
     };
   };
 
+  # gnome-keyringをWaylandセッションで使えるようにする
+  home.sessionVariables = {
+    GNOME_KEYRING_CONTROL = "/run/user/\${UID}/keyring";
+    SSH_AUTH_SOCK = "/run/user/\${UID}/keyring/ssh";
+  };
+
   xdg.desktopEntries = {
     rdp-work = {
       name = "RDP(work)";
