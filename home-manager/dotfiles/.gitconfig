@@ -1,0 +1,26 @@
+[user]
+	name = iwate
+	email = github@iwate.me
+[alias]
+	branches = branch -a
+	tags = tag
+	stashes = stash list
+	remotes = remote -v
+	unmerged = diff --name-only --diff-filter=U
+	unstage = reset -q HEAD --
+	discard = checkout --
+	uncommit = reset --mixed HEAD~
+	amend = commit --amend
+	precommit = diff --cached --diff-algorithm=minimal -w
+	refresh= !git fetch origin && git remote prune origin
+	c = commit -am
+	l = log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
+	s = status
+	ss = stash save
+	sp = stash pop
+	po = push origin
+	pom = push origin master
+	pum = pull origin master
+	cl = !git refresh && git clean -xdf
+[core]
+	pager = LESSCHARSET=utf-8 less
