@@ -28,7 +28,7 @@
   home.file.".config/niri/config.kdl".source = ./dotfiles/niri-config.kdl;
   home.file.".config/niri/config.kdl".force = true;
   home.file.".config/noctalia/colors.json".source = ./dotfiles/noctalia-colors.json;
-  home.file.".config/noctalia/settings.json".source = ./dotfiles/noctiles-settings.json;
+  home.file.".config/noctalia/settings.json".source = ./dotfiles/noctalia-settings.json;
   home.file.".config/kitty/kitty.conf".source = ./dotfiles/kitty.conf;
 
   programs.bash = {
