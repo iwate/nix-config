@@ -30,6 +30,7 @@
   home.file.".config/noctalia/colors.json".source = ./dotfiles/noctalia-colors.json;
   home.file.".config/noctalia/settings.json".source = ./dotfiles/noctalia-settings.json;
   home.file.".config/kitty/kitty.conf".source = ./dotfiles/kitty.conf;
+  home.file.".config/kitty/kitty.conf".force = true;
 
   programs.bash = {
     enable = true;
