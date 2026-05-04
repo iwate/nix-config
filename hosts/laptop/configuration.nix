@@ -124,7 +124,10 @@
   # List services that you want to enable:
   services.displayManager.sddm = {
     enable = true;
-    wayland.enable = true;
+    wayland = {
+      enable = true;
+      compositor = "kwin";
+    };
   };
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true;

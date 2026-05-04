@@ -46,9 +46,6 @@
             enable = true;
             theme = "default";
             settings = {
-              General = {
-                scale = 1.5;
-              };
             };
           };
         }
