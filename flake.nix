@@ -13,6 +13,11 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    silentSDDM = {
+      url = "github:uiriansan/SilentSDDM";
+      inputs.nixpkgs.follows = "nixpkgs";
+   };
   };
   
   nixConfig = {
@@ -34,6 +39,18 @@
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = { inherit inputs; };
           home-manager.users.iwate = import ./home-manager/home.nix;
+        }
+        {
+          imports = [inputs.silentSDDM.nixosModules.default];
+          programs.silentSDDM = {
+            enable = true;
+            theme = "default";
+            settings = {
+              General = {
+                scale = 1.5;
+              };
+            };
+          };
         }
       ];
     };
