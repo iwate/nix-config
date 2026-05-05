@@ -1,0 +1,13 @@
+{
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "explorer.confirmDragAndDrop": false,
+    "workbench.colorTheme": "Iceberg",
+    "editor.fontFamily": "'UDEV Gothic NFLG', 'Droid Sans Mono', monospace",
+    "window.titleBarStyle": "native",
+    "window.customTitleBarVisibility": "never",
+    "window.menuBarVisibility": "hidden",
+    "workbench.editor.showTabs": "single",
+    "workbench.statusBar.visible": false
+}

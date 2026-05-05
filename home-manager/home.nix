@@ -72,6 +72,8 @@ in
   home.file.".config/noctalia/settings.json".force = true;
   home.file.".config/kitty/kitty.conf".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/kitty.conf";
   home.file.".config/kitty/kitty.conf".force = true;
+  home.file.".config/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/vscode-settings.json";
+  home.file.".config/Code/User/settings.json".force = true;
 
   programs.bash = {
     enable = true;
