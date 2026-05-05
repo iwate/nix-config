@@ -337,6 +337,11 @@ window-rule {
 }
 
 window-rule {
+    match app-id="firefox"
+    opacity 0.85
+}
+
+window-rule {
     match app-id="code"
     opacity 0.85
 }
