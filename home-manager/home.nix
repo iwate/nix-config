@@ -1,4 +1,7 @@
 { config, pkgs, inputs, ... }:
+let 
+  dotfilesPath = "${config.home.homeDirectory}/nix-config/home-manager/dotfiles"; 
+in
 {
   programs.home-manager.enable = true;
   home.stateVersion = "25.11"; 
@@ -25,10 +28,12 @@
   home.file.".config/fcitx5/config".source = ./dotfiles/fcitx5-config;
   home.file.".config/fcitx5/profile".source = ./dotfiles/fcitx5-profile;
   home.file.".config/mozc/config1.db".source = ./dotfiles/mozc-config1.db;
-  home.file.".config/niri/config.kdl".source = ./dotfiles/niri-config.kdl;
+  home.file.".config/niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/niri-config.kdl";
   home.file.".config/niri/config.kdl".force = true;
   home.file.".config/noctalia/colors.json".source = ./dotfiles/noctalia-colors.json;
+  home.file.".config/noctalia/colors.json".force = true;
   home.file.".config/noctalia/settings.json".source = ./dotfiles/noctalia-settings.json;
+  home.file.".config/noctalia/settings.json".force = true;
   home.file.".config/kitty/kitty.conf".source = ./dotfiles/kitty.conf;
   home.file.".config/kitty/kitty.conf".force = true;
 
