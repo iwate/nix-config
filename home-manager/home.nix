@@ -29,11 +29,9 @@ in
   home.file.".config/mozc/config1.db".source = ./dotfiles/mozc-config1.db;
   home.file.".config/niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/niri-config.kdl";
   home.file.".config/niri/config.kdl".force = true;
-  home.file.".config/noctalia/colors.json".source = ./dotfiles/noctalia-colors.json;
-  home.file.".config/noctalia/colors.json".force = true;
-  home.file.".config/noctalia/settings.json".source = ./dotfiles/noctalia-settings.json;
+  home.file.".config/noctalia/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/noctalia-settings.json";
   home.file.".config/noctalia/settings.json".force = true;
-  home.file.".config/kitty/kitty.conf".source = ./dotfiles/kitty.conf;
+  home.file.".config/kitty/kitty.conf".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/kitty.conf";
   home.file.".config/kitty/kitty.conf".force = true;
 
   programs.bash = {
