@@ -21,7 +21,46 @@ in
     git
     slack
     obsidian
+    nautilus
+    gnome-themes-extra
   ];
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+    gtk4.extraCss = ''
+      .nautilus-window {
+        background: rgba(20, 20, 30, 0.78);
+        background-image: none;
+      }
+      .nautilus-window .view {
+        background: rgba(0,0,0,0);
+        background-image: none;
+      }
+      .nautilus-window .sidebar-pane {
+        background: rgba(0,0,0,0.20);
+        background-image: none;
+        box-shadow: none;
+      }
+    '';
+    # gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+    # gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
+  };
+
+  qt = {
+    enable = true;
+    platformTheme.name = "adwaita";
+    style.name = "adwaita-dark";
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };
 
   home.file.".config/git/config".source = ./dotfiles/.gitconfig;
   home.file.".config/fcitx5/config".source = ./dotfiles/fcitx5-config;
