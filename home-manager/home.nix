@@ -13,7 +13,6 @@ in
     firefox
     swaylock
     kitty
-    orca
     freerdp
     xwayland-satellite
     networkmanagerapplet
