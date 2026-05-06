@@ -23,6 +23,10 @@ in
     obsidian
     nautilus
     gnome-themes-extra
+    libnotify
+    ripgrep
+    bat
+    fd
   ];
 
   gtk = {
