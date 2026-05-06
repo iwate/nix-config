@@ -117,4 +117,29 @@ in
     };
   };
 
+  systemd.user.services.check-updates = {
+    Unit = {
+      Description = "Check for system updates";
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${config.home.homeDirectory}/nix-config/check-updates.sh";
+    };
+  };
+
+  systemd.user.timers.check-updates = {
+    Unit = {
+      Description = "Check for system updates every 4 hours";
+      Requires = "check-updates.service";
+    };
+    Timer = {
+      OnBootSec = "1min";
+      OnUnitActiveSec = "4h";
+      Persistent = true;
+    };
+    Install = {
+      WantedBy = [ "timers.target" ];
+    };
+  };
+
 }
