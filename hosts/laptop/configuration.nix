@@ -81,10 +81,21 @@
     };
   };
 
+  # Virtualisation
+  virtualisation = {
+    containers.enable = true;
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
+
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.iwate = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "podman" ];
   };
 
   # Allow flakes
