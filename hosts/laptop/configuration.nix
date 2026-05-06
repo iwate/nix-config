@@ -93,6 +93,9 @@
     "flakes"
   ];
 
+  # Allow iwate to use custom substituters
+  nix.settings.trusted-users = [ "root" "iwate" ];
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
