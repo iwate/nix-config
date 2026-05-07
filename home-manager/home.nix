@@ -82,22 +82,9 @@ in
   programs.bash = {
     enable = true;
     shellAliases = {
-      connect-work-rdp = ''
-        (
-          PASS=$(op read op://Private/RDP/password)
-          HOST=$(op read op://Private/RDP/host)
-          USER=$(op read op://Private/RDP/username)
-          DOMAIN=$(op read op://Private/RDP/domain)
-          GW=$(op read op://Private/RDP/gateway)
-
-          echo "$PASS" | DISPLAY=:0 ${pkgs.freerdp}/bin/xfreerdp /from-stdin \
-            /v:"$HOST" \
-            /u:"$USER" \
-            /d:"$DOMAIN" \
-            /gateway:g:"$GW" \
-            /f /kbd:layout:Japanese /kbd:remap:0x3a=0x64 /scale:140
-        )
-      '';
+      zircolite-sysmon = "${config.home.homeDirectory}/nix-config/home-manager/scripts/run-zircolite-podman.sh";
+      export-sysmon-log = "${config.home.homeDirectory}/nix-config/home-manager/scripts/export-sysmon-log.sh";
+      connect-work-rdp = "${config.home.homeDirectory}/nix-config/home-manager/scripts/connect-work-rdp.sh";
     };
   };
 
