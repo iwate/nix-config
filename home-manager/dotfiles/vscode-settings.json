@@ -9,5 +9,6 @@
     "window.customTitleBarVisibility": "never",
     "window.menuBarVisibility": "hidden",
     "workbench.editor.showTabs": "single",
-    "workbench.statusBar.visible": false
+    "workbench.statusBar.visible": false,
+    "explorer.confirmDelete": false
 }
