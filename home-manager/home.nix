@@ -24,6 +24,7 @@ in
     nautilus
     gnome-themes-extra
     libnotify
+    jq
     ripgrep
     bat
     fd
@@ -114,6 +115,16 @@ in
     };
   };
 
+  systemd.user.services.check-audits = {
+    Unit = {
+      Description = "Run Sysmon security rule audits";
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${config.home.homeDirectory}/nix-config/check-audits.sh";
+    };
+  };
+
   systemd.user.timers.check-updates = {
     Unit = {
       Description = "Check for system updates every 4 hours";
@@ -122,6 +133,21 @@ in
     Timer = {
       OnBootSec = "1min";
       OnUnitActiveSec = "4h";
+      Persistent = true;
+    };
+    Install = {
+      WantedBy = [ "timers.target" ];
+    };
+  };
+
+  systemd.user.timers.check-audits = {
+    Unit = {
+      Description = "Run security audits every 8 hours";
+      Requires = "check-audits.service";
+    };
+    Timer = {
+      OnBootSec = "3min";
+      OnUnitActiveSec = "8h";
       Persistent = true;
     };
     Install = {
