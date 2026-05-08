@@ -205,11 +205,61 @@ in
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall = {
+    enable = true;
+    allowPing = false;
+    logRefusedConnections = true;
+    rejectPackets = true;
+
+    # Inbound is denied by default. Keep explicit allow lists empty.
+    allowedTCPPorts = [ ];
+    allowedUDPPorts = [ ];
+
+  };
+
+  networking.nftables = {
+    enable = true;
+    ruleset = ''
+      table inet filter {
+        chain input {
+          type filter hook input priority 0; policy drop;
+
+          iifname "lo" accept
+          ct state established,related accept
+
+          # ICMP/ICMPv6 are needed for basic network health and IPv6.
+          ip protocol icmp icmp type echo-request drop
+          ip protocol icmp accept
+          ip6 nexthdr icmpv6 accept
+        }
+
+        chain forward {
+          type filter hook forward priority 0; policy drop;
+        }
+
+        chain output {
+          type filter hook output priority 0; policy drop;
+
+          oifname "lo" accept
+          ct state established,related accept
+
+          # Required outbound access.
+          tcp dport { 22, 443, 3389 } ct state new accept
+
+          # DNS.
+          udp dport 53 ct state new accept
+          tcp dport 53 ct state new accept
+
+          # NTP.
+          udp dport 123 ct state new accept
+
+          # DHCPv4 and DHCPv6 client traffic.
+          ip protocol udp udp sport 68 udp dport 67 accept
+          ip6 nexthdr udp udp sport 546 udp dport 547 accept
+        }
+      }
+    '';
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
