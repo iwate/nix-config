@@ -6,7 +6,7 @@ USER=$(op read op://Private/RDP/username)
 DOMAIN=$(op read op://Private/RDP/domain)
 GW=$(op read op://Private/RDP/gateway)
 
-echo "$PASS" | DISPLAY=:0 ${pkgs.freerdp}/bin/xfreerdp /from-stdin \
+echo "$PASS" | DISPLAY=:0 xfreerdp /from-stdin \
 /v:"$HOST" \
 /u:"$USER" \
 /d:"$DOMAIN" \
