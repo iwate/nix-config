@@ -111,6 +111,10 @@ in
     };
     Service = {
       Type = "oneshot";
+      Environment = [
+        "XDG_RUNTIME_DIR=%t"
+        "DBUS_SESSION_BUS_ADDRESS=unix:path=%t/bus"
+      ];
       ExecStart = "${config.home.homeDirectory}/nix-config/check-updates.sh";
     };
   };
@@ -121,6 +125,10 @@ in
     };
     Service = {
       Type = "oneshot";
+      Environment = [
+        "XDG_RUNTIME_DIR=%t"
+        "DBUS_SESSION_BUS_ADDRESS=unix:path=%t/bus"
+      ];
       ExecStart = "${config.home.homeDirectory}/nix-config/check-audits.sh";
     };
   };

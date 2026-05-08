@@ -14,7 +14,14 @@ LAST_RUN_FILE="$AUDIT_DIR/last-sysmon-audit.timestamp"
 notify_critical() {
 	local message="$1"
 	if command -v notify-send >/dev/null 2>&1; then
-		notify-send -u critical "Security audit alert" "$message"
+		if ! notify-send -u critical "Security audit alert" "$message"; then
+			echo "[check-audits] Desktop notification delivery failed." >&2
+		fi
+	fi
+	if command -v systemd-cat >/dev/null 2>&1; then
+		printf '%s\n' "$message" | systemd-cat -t check-audits -p err
+	elif command -v logger >/dev/null 2>&1; then
+		logger -t check-audits "$message"
 	fi
 	echo "[check-audits] $message" >&2
 }
