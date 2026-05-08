@@ -4,6 +4,10 @@
 
 { config, pkgs, inputs, ... }:
 
+let
+  sysmonPkg = pkgs.callPackage ../../pkgs/sysmon-for-linux/package.nix { };
+in
+
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -115,7 +119,59 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
+    sysmonPkg
   ];
+
+  environment.etc."sysmon/config.xml".text = ''
+    <Sysmon schemaversion="4.22">
+      <EventFiltering>
+      </EventFiltering>
+    </Sysmon>
+  '';
+
+  systemd.tmpfiles.rules = [
+    "d /opt/sysmon 0700 root root -"
+    "d /opt/sysinternalsEBPF 0700 root root -"
+  ];
+
+  systemd.services.sysmon = {
+    enable = true;
+    description = "Sysmon for Linux";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
+    serviceConfig = {
+      Type = "forking";
+      WorkingDirectory = "/opt/sysmon";
+      ExecStart = "${sysmonPkg}/bin/sysmon -i /opt/sysmon/config.xml -service";
+      ExecReload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
+      Restart = "on-failure";
+      RestartSec = 10;
+      LimitMEMLOCK = "infinity";
+    };
+    preStart = ''
+      install -m 0700 -d /opt/sysmon
+      install -m 0700 -d /opt/sysinternalsEBPF
+      install -m 0600 /etc/sysmon/config.xml /opt/sysmon/config.xml
+
+      for obj in ${sysmonPkg}/share/sysmon/*.o; do
+        install -m 0600 "$obj" /opt/sysmon/
+      done
+
+      # Sysinternals eBPF loader hard-codes /opt/sysinternalsEBPF paths.
+      install -m 0600 ${sysmonPkg}/share/sysmon/sysinternalsEBPFrawSock.o /opt/sysinternalsEBPF/
+      install -m 0600 ${sysmonPkg}/share/sysmon/sysinternalsEBPFmemDump.o /opt/sysinternalsEBPF/
+      install -m 0600 ${sysmonPkg}/share/sysmon/offsets.json /opt/sysinternalsEBPF/
+      ln -sfn /opt/sysinternalsEBPF/offsets.json /opt/sysinternalsEBPF/sysinternalsEBPF_offsets.conf
+
+      touch /opt/sysmon/eula_accepted
+      chmod 0600 /opt/sysmon/eula_accepted
+
+      # Store argv/argc used by Sysmon for service restarts and config reloads.
+      printf '\004\000\000\000' > /opt/sysmon/argc
+      printf '%s\0' '${sysmonPkg}/bin/sysmon' '-i' '/opt/sysmon/config.xml' '-service' > /opt/sysmon/argv
+      chmod 0600 /opt/sysmon/argc /opt/sysmon/argv
+    '';
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
