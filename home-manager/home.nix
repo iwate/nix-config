@@ -155,7 +155,7 @@ in
     };
     Timer = {
       OnBootSec = "3min";
-      OnUnitActiveSec = "8h";
+      OnUnitActiveSec = "2h";
       Persistent = true;
     };
     Install = {
