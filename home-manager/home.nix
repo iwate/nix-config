@@ -28,6 +28,7 @@ in
     ripgrep
     bat
     fd
+    ffmpeg
   ];
 
   gtk = {
@@ -86,6 +87,7 @@ in
       zircolite-sysmon = "${config.home.homeDirectory}/nix-config/home-manager/scripts/run-zircolite-podman.sh";
       export-sysmon-log = "${config.home.homeDirectory}/nix-config/home-manager/scripts/export-sysmon-log.sh";
       connect-work-rdp = "${config.home.homeDirectory}/nix-config/home-manager/scripts/connect-work-rdp.sh";
+      listen-srt = "${config.home.homeDirectory}/nix-config/home-manager/scripts/listen-srt.sh";
     };
   };
 

@@ -19,8 +19,12 @@ in
   boot.loader.systemd-boot.configurationLimit = 3;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Load v4l2loopback module at boot for use with OBS and other video applications.
+  boot.extraModulePackages = with config.boot.kernelPackages; [v4l2loopback];
+  boot.kernelModules = ["v4l2loopback"];
   # unload kernel modules that are not needed and have had security vulnerabilities in the past.
   boot.extraModprobeConfig = ''
+    options v4l2loopback exclusive_caps=1 max_buffers=2 video_nr=10 card_label="Virtual Camera"
     install esp4 ${pkgs.coreutils}/bin/false
     install esp6 ${pkgs.coreutils}/bin/false
     install rxrpc ${pkgs.coreutils}/bin/false
