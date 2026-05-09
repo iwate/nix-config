@@ -18,6 +18,18 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # unload kernel modules that are not needed and have had security vulnerabilities in the past.
+  boot.extraModprobeConfig = ''
+    install esp4 ${pkgs.coreutils}/bin/false
+    install esp6 ${pkgs.coreutils}/bin/false
+    install rxrpc ${pkgs.coreutils}/bin/false
+  '';
+  boot.blacklistedKernelModules = [
+    "esp4"
+    "esp6"
+    "rxrpc"
+  ];
+
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
