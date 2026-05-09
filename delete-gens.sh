@@ -4,11 +4,11 @@ set -eu
 
 profile="/nix/var/nix/profiles/system"
 
-# Keep newest 3 generations and delete older ones.
+# Keep only the newest generation to avoid filling tiny EFI partitions.
 old_generations="$({
 	sudo nix-env --list-generations -p "$profile" \
 		| awk '/^[[:space:]]*[0-9]+/ { print $1 }' \
-		| head -n -3
+		| head -n -1
 } || true)"
 
 if [ -n "$old_generations" ]; then
@@ -18,4 +18,8 @@ fi
 
 # Collect garbage without --delete-old, so kept generations remain.
 sudo nix-collect-garbage
+
+# Remove stale temporary EFI files left by failed systemd-boot copies.
+sudo sh -c 'rm -f /boot/EFI/nixos/*.tmp'
+
 sudo nixos-rebuild boot --flake .#laptop
