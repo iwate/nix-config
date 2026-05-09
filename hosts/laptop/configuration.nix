@@ -16,6 +16,7 @@ in
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 3;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # unload kernel modules that are not needed and have had security vulnerabilities in the past.
