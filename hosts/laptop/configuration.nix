@@ -226,7 +226,7 @@ in
 
     # Inbound is denied by default. Keep explicit allow lists empty.
     allowedTCPPorts = [ ];
-    allowedUDPPorts = [ ];
+    allowedUDPPorts = [ 5000 ];
 
   };
 
@@ -239,6 +239,9 @@ in
 
           iifname "lo" accept
           ct state established,related accept
+
+          # Allow inbound UDP on port 5000.
+          udp dport 5000 ct state new accept
 
           # ICMP/ICMPv6 are needed for basic network health and IPv6.
           ip protocol icmp icmp type echo-request drop
