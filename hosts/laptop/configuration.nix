@@ -264,7 +264,7 @@ in
           ct state established,related accept
 
           # Required outbound access.
-          tcp dport { 22, 443, 3389 } ct state new accept
+          tcp dport { 22, 80, 443, 3389 } ct state new accept
 
           # DNS.
           udp dport 53 ct state new accept

@@ -10,5 +10,8 @@
     "window.menuBarVisibility": "hidden",
     "workbench.editor.showTabs": "single",
     "workbench.statusBar.visible": false,
-    "explorer.confirmDelete": false
+    "explorer.confirmDelete": false,
+    "dev.containers.dockerPath": "podman",
+    "dev.containers.dockerComposePath": "podman compose",
+    "dev.containers.dockerSocketPath": "/var/run/podman/podman.sock"
 }
