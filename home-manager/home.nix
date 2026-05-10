@@ -10,8 +10,8 @@ in
   home.homeDirectory = "/home/iwate";
 
   home.packages = with pkgs; [
+    powershell
     firefox
-    swaylock
     kitty
     freerdp
     xwayland-satellite
@@ -89,6 +89,8 @@ in
   home.file.".config/kitty/kitty.conf".force = true;
   home.file.".config/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/vscode-settings.json";
   home.file.".config/Code/User/settings.json".force = true;
+  home.file.".config/powershell/profile.ps1".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/powershell-profile.ps1";
+  home.file.".config/powershell/profile.ps1".force = true;
 
   programs.bash = {
     enable = true;
