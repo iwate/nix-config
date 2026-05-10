@@ -26,6 +26,20 @@ notify_critical() {
 	echo "[check-audits] $message" >&2
 }
 
+notify_normal() {
+	local message="$1"
+	if command -v notify-send >/dev/null 2>&1; then
+		if ! notify-send -u normal "Security audit" "$message"; then
+			echo "[check-audits] Desktop notification delivery failed." >&2
+		fi
+	fi
+	if command -v systemd-cat >/dev/null 2>&1; then
+		printf '%s\n' "$message" | systemd-cat -t check-audits -p info
+	elif command -v logger >/dev/null 2>&1; then
+		logger -t check-audits "$message"
+	fi
+}
+
 require_file() {
 	local path="$1"
 	if [[ ! -f "$path" ]]; then
@@ -90,9 +104,10 @@ fi
 printf '%s\n' "$RUN_STARTED_AT" > "$LAST_RUN_FILE"
 
 if [[ "$DETECTION_COUNT" -gt 0 ]]; then
-	notify_critical "Detected $DETECTION_COUNT audit hit(s). See $RESULT_FILE"
+	notify_critical "🚨 Detected $DETECTION_COUNT audit hit(s). See $RESULT_FILE"
 	exit 2
 fi
 
+notify_normal "✅ No audit findings. Output: $RESULT_FILE"
 echo "No audit findings. Output: $RESULT_FILE"
 
