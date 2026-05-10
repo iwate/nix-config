@@ -28,7 +28,7 @@ in
     ripgrep
     bat
     fd
-    ffmpeg
+    (ffmpeg-full.override {config.rocmSupport=true;})
   ];
 
   services.ollama = {
