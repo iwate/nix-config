@@ -29,6 +29,7 @@ in
     bat
     fd
     (ffmpeg-full.override {config.rocmSupport=true;})
+    v4l-utils
     deno
   ];
 
@@ -177,5 +178,5 @@ in
       WantedBy = [ "timers.target" ];
     };
   };
-
+  
 }
