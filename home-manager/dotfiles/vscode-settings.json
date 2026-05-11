@@ -9,7 +9,7 @@
     "window.customTitleBarVisibility": "never",
     "window.menuBarVisibility": "hidden",
     "workbench.editor.showTabs": "single",
-    "workbench.statusBar.visible": false,
+    "workbench.statusBar.visible": true,
     "explorer.confirmDelete": false,
     "dev.containers.dockerPath": "podman",
     "dev.containers.dockerComposePath": "podman compose",
