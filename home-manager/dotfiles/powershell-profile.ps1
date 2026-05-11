@@ -42,6 +42,19 @@ function Connect-RDP {
     bash ~/nix-config/home-manager/scripts/connect-work-rdp.sh
 }
 
+function Publish-Blog {
+    param(
+        [Parameter(Mandatory = $true)]
+        $markdownFile
+    )
+    $absolutePath = (Resolve-Path $markdownFile).Path
+    pushd
+    cd ~/works/blog
+    bash ~/nix-config/home-manager/scripts/blog/md2blog.sh "$absolutePath"
+    ~/nix-config/home-manager/scripts/blog/Post-Blog.ps1 -Path ./output.zip
+    popd
+}
+
 Remove-Item alias:cd
 Set-Alias cd Move-Location
 

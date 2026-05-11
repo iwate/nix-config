@@ -29,6 +29,7 @@ in
     bat
     fd
     (ffmpeg-full.override {config.rocmSupport=true;})
+    deno
   ];
 
   services.ollama = {
@@ -99,6 +100,7 @@ in
       export-sysmon-log = "${config.home.homeDirectory}/nix-config/home-manager/scripts/export-sysmon-log.sh";
       connect-work-rdp = "${config.home.homeDirectory}/nix-config/home-manager/scripts/connect-work-rdp.sh";
       listen-srt = "${config.home.homeDirectory}/nix-config/home-manager/scripts/listen-srt.sh";
+      md2blog = "${config.home.homeDirectory}/nix-config/home-manager/scripts/blog/md2blog.sh";
     };
   };
 
