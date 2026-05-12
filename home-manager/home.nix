@@ -11,7 +11,7 @@ in
 
   home.packages = with pkgs; [
     powershell
-    firefox
+    google-chrome
     kitty
     freerdp
     xwayland-satellite
