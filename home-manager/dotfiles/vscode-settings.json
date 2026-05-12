@@ -13,5 +13,8 @@
     "explorer.confirmDelete": false,
     "dev.containers.dockerPath": "podman",
     "dev.containers.dockerComposePath": "podman compose",
-    "dev.containers.dockerSocketPath": "/var/run/podman/podman.sock"
+    "dev.containers.dockerSocketPath": "/var/run/podman/podman.sock",
+    "powershell.powerShellAdditionalExePaths": [
+        "/etc/profiles/per-user/iwate/bin/pwsh"
+    ]
 }
