@@ -338,6 +338,18 @@ window-rule {
 }
 
 window-rule {
+    match app-id="chrome-ompifgpmddkgmclendfeacglnodjjndh-Profile_1"
+    opacity 0.85
+}
+
+
+window-rule {
+    match app-id="Slack"
+    opacity 0.85
+}
+
+
+window-rule {
     match app-id="code"
     opacity 0.85
 }
