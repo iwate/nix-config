@@ -78,6 +78,7 @@ function Transform([string]$Html) {
 
     # Append Css
     $DOM.SelectSingleNode("/html/head").AppendChild(('<link rel="stylesheet" href="https://cdn.simplecss.org/simple.css">' | ConvertFrom-Html))
+    $DOM.SelectSingleNode("/html/head").AppendChild(('<style>iframe[src^="https://www.youtube.com/embed/"] { aspect-ratio: 16/9; width: 100%; }</style>' | ConvertFrom-Html))
 
     # Append Meta
     $DOM.SelectSingleNode("/html/head").AppendChild(('<meta name="viewport" content="width=device-width, initial-scale=1.0">' | ConvertFrom-Html))
