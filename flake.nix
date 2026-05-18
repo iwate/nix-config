@@ -18,6 +18,11 @@
       url = "github:uiriansan/SilentSDDM";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    srtcam = {
+      url = "github:iwate/srtcam";
+      flake = false;
+    };
   };
   
   nixConfig = {
