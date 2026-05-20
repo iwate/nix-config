@@ -655,7 +655,7 @@
         "translucentWidgets": true
     },
     "wallpaper": {
-        "automationEnabled": false,
+        "automationEnabled": true,
         "directory": "/home/iwate/Pictures/Wallpapers",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
