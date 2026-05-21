@@ -16,5 +16,6 @@
     "dev.containers.dockerSocketPath": "/var/run/podman/podman.sock",
     "powershell.powerShellAdditionalExePaths": [
         "/etc/profiles/per-user/iwate/bin/pwsh"
-    ]
+    ],
+    "extensions.ignoreRecommendations": true
 }
