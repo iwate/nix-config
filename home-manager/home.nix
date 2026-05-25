@@ -4,14 +4,14 @@ let
 in
 {
   programs.home-manager.enable = true;
-  home.stateVersion = "26.05"; 
+  home.stateVersion = "25.11"; 
 
   home.username = "iwate";
   home.homeDirectory = "/home/iwate";
 
   home.packages = with pkgs; [
     powershell
-    google-chrome
+    firefox
     kitty
     freerdp
     xwayland-satellite
