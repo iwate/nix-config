@@ -158,6 +158,16 @@ in
   environment.etc."sysmon/config.xml".text = ''
     <Sysmon schemaversion="4.22">
       <EventFiltering>
+        <NetworkConnect onmatch="exclude">
+          <DestinationHostname condition="is">google.com</DestinationHostname>
+          <DestinationHostname condition="end with">.google.com</DestinationHostname>
+          <DestinationHostname condition="end with">.googleapis.com</DestinationHostname>
+        </NetworkConnect>
+        <DnsQuery onmatch="exclude">
+          <QueryName condition="is">google.com</QueryName>
+          <QueryName condition="end with">.google.com</QueryName>
+          <QueryName condition="end with">.googleapis.com</QueryName>
+        </DnsQuery>
       </EventFiltering>
     </Sysmon>
   '';
