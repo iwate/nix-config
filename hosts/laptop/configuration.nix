@@ -162,6 +162,7 @@ in
           <DestinationHostname condition="is">google.com</DestinationHostname>
           <DestinationHostname condition="end with">.google.com</DestinationHostname>
           <DestinationHostname condition="end with">.googleapis.com</DestinationHostname>
+          <DestinationIp condition="is">0.0.0.0/32</DestinationIp>
         </NetworkConnect>
         <DnsQuery onmatch="exclude">
           <QueryName condition="is">google.com</QueryName>
