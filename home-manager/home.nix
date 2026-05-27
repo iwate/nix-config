@@ -109,6 +109,7 @@ in
   home.sessionVariables = {
     GNOME_KEYRING_CONTROL = "/run/user/\${UID}/keyring";
     SSH_AUTH_SOCK = "/run/user/\${UID}/keyring/ssh";
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
   };
 
   xdg.desktopEntries = {
