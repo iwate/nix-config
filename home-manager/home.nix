@@ -31,6 +31,7 @@ in
     (ffmpeg-full.override {config.rocmSupport=true;})
     v4l-utils
     deno
+    awscli2
   ];
 
   services.ollama = {
