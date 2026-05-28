@@ -32,6 +32,7 @@ in
     v4l-utils
     deno
     awscli2
+    kicad
   ];
 
   services.ollama = {
