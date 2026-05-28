@@ -82,6 +82,11 @@ in
   };
 
   home.file.".config/git/config".source = ./dotfiles/.gitconfig;
+  home.file.".config/git/config".force = true;
+  home.file.".config/git/allowed_signers".source = ./dotfiles/git-allowed-signers;
+  home.file.".config/git/allowed_signers".force = true;
+  home.file.".ssh/config".source = ./dotfiles/ssh-config;
+  home.file.".ssh/config".force = true;
   home.file.".config/fcitx5/config".source = ./dotfiles/fcitx5-config;
   home.file.".config/fcitx5/profile".source = ./dotfiles/fcitx5-profile;
   home.file.".config/mozc/config1.db".source = ./dotfiles/mozc-config1.db;
@@ -107,10 +112,10 @@ in
     };
   };
 
-  # gnome-keyringをWaylandセッションで使えるようにする
+  # Use 1Password SSH agent for git/ssh, keep gnome-keyring for secrets.
   home.sessionVariables = {
     GNOME_KEYRING_CONTROL = "/run/user/\${UID}/keyring";
-    SSH_AUTH_SOCK = "/run/user/\${UID}/keyring/ssh";
+    SSH_AUTH_SOCK = "${config.home.homeDirectory}/.1password/agent.sock";
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
   };
 

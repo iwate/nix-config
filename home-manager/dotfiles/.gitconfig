@@ -1,6 +1,17 @@
 [user]
 	name = iwate
 	email = github@iwate.me
+	signingKey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILoTJsxvtP85GAoOhQpYf2RVOgYnt9eRLnZUT6lsnATM
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /run/current-system/sw/bin/op-ssh-sign
+	defaultKeyCommand = ssh-add -L
+	allowedSignersFile = /home/iwate/.config/git/allowed_signers
 [alias]
 	branches = branch -a
 	tags = tag
@@ -14,7 +25,7 @@
 	precommit = diff --cached --diff-algorithm=minimal -w
 	refresh= !git fetch origin && git remote prune origin
 	c = commit -am
-	l = log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
+	l = log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %G? %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
 	s = status
 	ss = stash save
 	sp = stash pop
