@@ -25,7 +25,7 @@
 	precommit = diff --cached --diff-algorithm=minimal -w
 	refresh= !git fetch origin && git remote prune origin
 	c = commit -am
-	l = log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %G? %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
+	l = log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %G?, %cr) %Cred%d' --date-order
 	s = status
 	ss = stash save
 	sp = stash pop
