@@ -81,6 +81,13 @@ in
     };
   };
 
+  services.udiskie = {
+    enable = true;
+    automount = true;
+    notify = true;
+    tray = "never";
+  };
+
   home.file.".config/git/config".source = ./dotfiles/.gitconfig;
   home.file.".config/git/config".force = true;
   home.file.".config/git/allowed_signers".source = ./dotfiles/git-allowed-signers;

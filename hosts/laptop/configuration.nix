@@ -233,6 +233,10 @@ in
     };
   };
 
+  # UDisks2 provides privileged mount operations; automount is handled in user session.
+  services.udisks2.enable = true;
+  services.gvfs.enable = true;
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
