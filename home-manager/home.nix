@@ -96,7 +96,9 @@ in
   home.file.".ssh/config".source = ./dotfiles/ssh-config;
   home.file.".ssh/config".force = true;
   home.file.".config/fcitx5/config".source = ./dotfiles/fcitx5-config;
+  home.file.".config/fcitx5/config".force = true;
   home.file.".config/fcitx5/profile".source = ./dotfiles/fcitx5-profile;
+  home.file.".config/fcitx5/profile".force = true;
   home.file.".config/mozc/config1.db".source = ./dotfiles/mozc-config1.db;
   home.file.".config/niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/niri-config.kdl";
   home.file.".config/niri/config.kdl".force = true;
