@@ -43,7 +43,7 @@ mkdir -p "$OUTPUT_DIR"
 podman run --rm --tty \
   -v "$EVENTS_DIR:/case/events:ro" \
   -v "$RULESET_DIR:/case/rules:ro" \
-  -v "$OUTPUT_DIR:/case/output" \
+  -v "$OUTPUT_DIR:/case/output:Z,U" \
   docker.io/wagga40/zircolite:latest \
   --events "/case/events/$(basename "$EVENTS_PATH")" \
   --ruleset "/case/rules/$(basename "$RULESET_PATH")" \
