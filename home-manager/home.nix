@@ -39,7 +39,7 @@ in
     enable = true;
     acceleration = "rocm";
     environmentVariables = {
-      OLLAMA_CONTEXT_LENGTH = "64000";
+      OLLAMA_CONTEXT_LENGTH = "262144";
       HSA_OVERRIDE_GFX_VERSION = "11.5.0";
       LD_LIBRARY_PATH = "/run/opengl-driver/lib:/run/current-system/sw/lib";
     };
