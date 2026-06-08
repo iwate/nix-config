@@ -22,7 +22,7 @@ $FooterHtml = @"
     <a class="button" href="https://blog.iwate.me">Read other posts</a>
     <p>
         🗻 Bits, Bytes, and Tokyo Nights 🗼
-        <a href="https://github.com/iwate">GitHub</a> / <a href="https://bsky.app/profile/iwate.me">SNS</a> / <a href="https://raindrop.io/collection/9927677">Bookmarks</a>
+        <a href="https://github.com/iwate">GitHub</a> / <a href="https://bsky.app/profile/iwate.me">SNS</a> / <a href="https://b.iwate.me/">Bookmarks</a>
     </p>
 </footer>
 <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8979717305625609" crossorigin="anonymous"></script>
