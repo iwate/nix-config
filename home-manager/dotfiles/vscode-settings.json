@@ -18,5 +18,6 @@
         "/etc/profiles/per-user/iwate/bin/pwsh"
     ],
     "extensions.ignoreRecommendations": true,
-    "remote.autoForwardPortsSource": "hybrid"
+    "remote.autoForwardPortsSource": "hybrid",
+    "window.restoreWindows": "none"
 }
