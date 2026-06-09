@@ -62,7 +62,7 @@ if ! command -v jq >/dev/null 2>&1; then
 fi
 
 if ! "$EXPORT_SCRIPT" "$EVENTS_FILE" "$LAST_RUN_FILE" "$RUN_STARTED_AT"; then
-	notify_critical "Failed to export Sysmon log. Check sudo/journalctl access."
+	notify_critical "Failed to export Sysmon log. Check logs/audits ownership/permissions and journalctl access."
 	exit 1
 fi
 
