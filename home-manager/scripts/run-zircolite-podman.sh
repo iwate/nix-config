@@ -37,17 +37,31 @@ EVENTS_DIR=$(dirname "$EVENTS_PATH")
 RULESET_DIR=$(dirname "$RULESET_PATH")
 OUTPUT_DIR=$(dirname "$OUTPUT_FILE")
 OUTPUT_NAME=$(basename "$OUTPUT_FILE")
+CONTAINER_OUTFILE="/tmp/$OUTPUT_NAME"
+TMP_OUTPUT_FILE="$OUTPUT_FILE.tmp.$$"
 
 mkdir -p "$OUTPUT_DIR"
 
-podman run --rm --tty \
+CONTAINER_ID=""
+cleanup() {
+  rm -f "$TMP_OUTPUT_FILE"
+  if [[ -n "$CONTAINER_ID" ]]; then
+    podman rm -f "$CONTAINER_ID" >/dev/null 2>&1 || true
+  fi
+}
+trap cleanup EXIT
+
+CONTAINER_ID=$(podman create --tty \
   -v "$EVENTS_DIR:/case/events:ro" \
   -v "$RULESET_DIR:/case/rules:ro" \
-  -v "$OUTPUT_DIR:/case/output:Z,U" \
   docker.io/wagga40/zircolite:latest \
   --events "/case/events/$(basename "$EVENTS_PATH")" \
   --ruleset "/case/rules/$(basename "$RULESET_PATH")" \
   --sysmon4linux \
-  --outfile "/case/output/$OUTPUT_NAME"
+  --outfile "$CONTAINER_OUTFILE")
+
+podman start -a "$CONTAINER_ID"
+podman cp "$CONTAINER_ID:$CONTAINER_OUTFILE" "$TMP_OUTPUT_FILE"
+mv -f "$TMP_OUTPUT_FILE" "$OUTPUT_FILE"
 
 echo "Detection result: $OUTPUT_FILE"
