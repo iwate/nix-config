@@ -236,6 +236,17 @@ in
   # UDisks2 provides privileged mount operations; automount is handled in user session.
   services.udisks2.enable = true;
   services.gvfs.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    nssmdns6 = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      workstation = true;
+      userServices = true;
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -294,6 +305,9 @@ in
           # Allow inbound UDP on port 5000.
           udp dport 5000 ct state new accept
 
+          # mDNS (Bonjour/Avahi).
+          udp dport 5353 accept
+
           # ICMP/ICMPv6 are needed for basic network health and IPv6.
           ip protocol icmp icmp type echo-request drop
           ip protocol icmp accept
@@ -316,6 +330,9 @@ in
           # DNS.
           udp dport 53 ct state new accept
           tcp dport 53 ct state new accept
+
+          # mDNS (Bonjour/Avahi).
+          udp dport 5353 accept
 
           # NTP.
           udp dport 123 ct state new accept
