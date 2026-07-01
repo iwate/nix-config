@@ -48,6 +48,10 @@ require_file() {
 	fi
 }
 
+curl 'https://raw.githubusercontent.com/wagga40/Zircolite-Rules-v2/refs/heads/main/rules_linux_medium.json' \
+	-o "$RULESET_FILE" \
+	--silent --show-error --fail --location --max-time 30
+
 mkdir -p "$AUDIT_DIR"
 
 require_file "$EXPORT_SCRIPT"
