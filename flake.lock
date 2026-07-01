@@ -1,5 +1,23 @@
 {
   "nodes": {
+    "genzo": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1782089298,
+        "narHash": "sha256-SbBxW5uGidTXBTKrjcZmqKYtlB2zqklIE7WjScC9QYk=",
+        "ref": "refs/heads/main",
+        "rev": "6712b8628aa4d7942c1c1865ea757cd963133c17",
+        "revCount": 55,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/iwate/genzo.git"
+      },
+      "original": {
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/iwate/genzo.git"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -82,6 +100,7 @@
     },
     "root": {
       "inputs": {
+        "genzo": "genzo",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "noctalia": "noctalia",

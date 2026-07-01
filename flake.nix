@@ -23,6 +23,11 @@
       url = "github:iwate/srtcam";
       flake = false;
     };
+
+    genzo = {
+      url = "git+https://github.com/iwate/genzo.git?submodules=1";
+      flake = false;
+    };
   };
   
   nixConfig = {
@@ -30,9 +35,35 @@
     extra-trusted-public-keys = [ "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=" ];
   };  
 
-  outputs = inputs@{ self, nixpkgs, ... }: {
+  outputs = inputs@{ self, nixpkgs, ... }:
+  let
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+    };
+
+    genzoPackage = pkgs.callPackage ./pkgs/genzo/package.nix {
+      inherit (inputs) genzo;
+    };
+  in {
+    packages.${system} = {
+      genzo = genzoPackage;
+      default = genzoPackage;
+    };
+
+    apps.${system} = {
+      genzo = {
+        type = "app";
+        program = "${genzoPackage}/bin/genzo";
+      };
+      default = {
+        type = "app";
+        program = "${genzoPackage}/bin/genzo";
+      };
+    };
+
     nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+      system = system;
       specialArgs = { inherit inputs; };
       modules = [
         # ... other modules
