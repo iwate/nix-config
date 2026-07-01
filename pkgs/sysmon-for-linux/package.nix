@@ -143,8 +143,8 @@ stdenvNoCC.mkDerivation rec {
 
     # NixOS keeps /etc/systemd/system read-only; avoid installer writes there.
     # Patch the binary string in-place with same-length replacement.
-    # Avoid SIGPIPE under pipefail by making grep stop at first match.
-    off=$(grep -abo -m1 '/etc/systemd/system' "$out/bin/sysmon" | cut -d: -f1)
+    match=$(grep -abo -m1 '/etc/systemd/system' "$out/bin/sysmon" || true)
+    off="''${match%%:*}"
     if [ -z "$off" ]; then
       echo "Could not find /etc/systemd/system string in sysmon binary"
       exit 1
