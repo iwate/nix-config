@@ -1,6 +1,9 @@
 { config, pkgs, inputs, ... }:
 let 
   dotfilesPath = "${config.home.homeDirectory}/nix-config/home-manager/dotfiles"; 
+  genzoPkg = pkgs.callPackage ../pkgs/genzo/package.nix {
+    genzo = inputs.genzo;
+  };
 in
 {
   programs.home-manager.enable = true;
@@ -10,6 +13,7 @@ in
   home.homeDirectory = "/home/iwate";
 
   home.packages = with pkgs; [
+    genzoPkg
     powershell
     google-chrome
     kitty
