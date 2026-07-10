@@ -37,6 +37,7 @@ in
     deno
     awscli2
     kicad
+    fastfetch
   ];
 
   services.ollama = {
