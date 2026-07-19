@@ -38,6 +38,7 @@ in
     awscli2
     kicad
     fastfetch
+    freecad
   ];
 
   services.ollama = {
