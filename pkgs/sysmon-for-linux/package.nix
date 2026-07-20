@@ -156,16 +156,16 @@ stdenvNoCC.mkDerivation rec {
       symBase="$2"
       dst="$3"
 
-      startHex=$(readelf -Ws "$src" | awk -v s="''${symBase}_start" '$8==s{print $2; exit}')
-      endHex=$(readelf -Ws "$src" | awk -v s="''${symBase}_end" '$8==s{print $2; exit}')
-      secIdx=$(readelf -Ws "$src" | awk -v s="''${symBase}_start" '$8==s{gsub(/\[|\]/, "", $7); print $7; exit}')
+      startHex=$(readelf -Ws "$src" | awk -v s="''${symBase}_start" '($8==s && !found){print $2; found=1}')
+      endHex=$(readelf -Ws "$src" | awk -v s="''${symBase}_end" '($8==s && !found){print $2; found=1}')
+      secIdx=$(readelf -Ws "$src" | awk -v s="''${symBase}_start" '($8==s && !found){gsub(/\[|\]/, "", $7); print $7; found=1}')
 
       if [ -z "$startHex" ] || [ -z "$endHex" ] || [ -z "$secIdx" ]; then
         echo "Failed to find embedded symbol: ''${symBase} in $src"
         exit 1
       fi
 
-      secLine=$(readelf -W -S "$src" | awk -v idx="$secIdx" '$1=="["idx"]"{print; exit}')
+      secLine=$(readelf -W -S "$src" | awk -v idx="$secIdx" '($1=="["idx"]" && !found){print; found=1}')
       secAddr=$(echo "$secLine" | awk '{print $4}')
       secOff=$(echo "$secLine" | awk '{print $5}')
 
