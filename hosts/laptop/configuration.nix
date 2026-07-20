@@ -350,7 +350,7 @@ EOF
           ct state established,related accept
 
           # Required outbound access.
-          tcp dport { 22, 80, 443, 3389 } ct state new accept
+          tcp dport { 22, 80, 443, 2096, 3389 } ct state new accept
 
           # DNS.
           udp dport 53 ct state new accept
@@ -361,6 +361,9 @@ EOF
 
           # NTP.
           udp dport 123 ct state new accept
+
+          # Discord Voice/Video (WebRTC)
+          udp dport 10000-65535 ct state new accept
 
           # DHCPv4 and DHCPv6 client traffic.
           ip protocol udp udp sport 68 udp dport 67 accept
