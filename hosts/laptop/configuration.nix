@@ -330,6 +330,9 @@ EOF
           # Allow inbound UDP on port 5000.
           udp dport 5000 ct state new accept
 
+          # Bambu Lab printer discovery (LAN mode).
+          udp dport { 1900, 2021 } ct state new accept
+
           # mDNS (Bonjour/Avahi).
           udp dport 5353 accept
 
@@ -351,6 +354,11 @@ EOF
 
           # Required outbound access.
           tcp dport { 22, 80, 443, 2096, 3389 } ct state new accept
+
+          # Bambu Studio/Lab printer communication (LAN mode).
+          udp dport { 1900, 2021 } ct state new accept
+          tcp dport 8883 ct state new accept
+          tcp dport { 990, 50000-50100 } ct state new accept
 
           # DNS.
           udp dport 53 ct state new accept
