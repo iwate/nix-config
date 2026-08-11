@@ -39,7 +39,6 @@ in
     kicad
     fastfetch
     freecad
-    (bambu-studio.override { stdenv = gcc14Stdenv; })
   ];
 
   services.ollama = {
