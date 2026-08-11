@@ -280,6 +280,13 @@ in
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
+  networking.getaddrinfo.enable = true;
+  networking.getaddrinfo.precedence = {
+    "::1/128"       = 50;
+    "::/0"          = 40;
+    "::ffff:0:0/96" = 100;
+  };
+
   networking.firewall = {
     enable = true;
     allowPing = false;
