@@ -6,6 +6,10 @@ let
   };
 in
 {
+  imports = [
+    inputs.nix-flatpak.homeManagerModules.nix-flatpak
+  ];
+
   programs.home-manager.enable = true;
   home.stateVersion = "26.05"; 
 
@@ -92,6 +96,15 @@ in
     automount = true;
     notify = true;
     tray = "never";
+  };
+
+  services.flatpak = {
+    enable = true;
+    update.onActivation = true;
+    packages = [
+      "com.bambulab.BambuStudio"
+      "org.freecad.FreeCAD"
+    ];
   };
 
   home.file.".config/git/config".source = ./dotfiles/.gitconfig;

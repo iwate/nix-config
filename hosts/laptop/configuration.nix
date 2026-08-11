@@ -234,6 +234,7 @@ in
   };
 
   # UDisks2 provides privileged mount operations; automount is handled in user session.
+  services.flatpak.enable = true;
   services.udisks2.enable = true;
   services.gvfs.enable = true;
   services.avahi = {
