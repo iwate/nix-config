@@ -63,3 +63,7 @@ Set-Alias cd Move-Location
 set-pwd
 
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
+function ls {
+    & /run/current-system/sw/bin/ls --color=always @args
+}
