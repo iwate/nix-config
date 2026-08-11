@@ -134,31 +134,6 @@ in
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  nixpkgs.overlays = [
-    (final: prev: {
-      vtk = prev.vtk.overrideAttrs (old: {
-        postPatch = (old.postPatch or "") + ''
-          substituteInPlace IO/GDAL/vtkGDALRasterReader.cxx \
-            --replace-fail 'char** papszMetaData = GDALGetMetadata(this->GDALData, nullptr);' 'CSLConstList papszMetaData = GDALGetMetadata(this->GDALData, nullptr);' \
-            --replace-fail 'char** papszMetadata = GDALGetMetadata(this->Impl->GDALData, domain.c_str());' 'CSLConstList papszMetadata = GDALGetMetadata(this->Impl->GDALData, domain.c_str());'
-        '';
-      });
-
-      freecad = prev.freecad.overrideAttrs (_old: {
-        postInstall = ''
-          thumbnailer="$out/share/thumbnailers/FreeCAD.thumbnailer"
-          mkdir -p "$(dirname "$thumbnailer")"
-          cat > "$thumbnailer" <<EOF
-[Thumbnailer Entry]
-TryExec=$out/bin/freecad-thumbnailer
-Exec=$out/bin/freecad-thumbnailer -s %s %i %o
-MimeType=application/x-extension-fcstd;
-EOF
-        '';
-      });
-    })
-  ];
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
