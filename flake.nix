@@ -21,11 +21,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    srtcam = {
-      url = "github:iwate/srtcam";
-      flake = false;
-    };
-
     genzo = {
       url = "git+https://github.com/iwate/genzo.git?submodules=1";
       flake = false;

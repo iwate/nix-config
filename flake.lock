@@ -121,8 +121,7 @@
         "nix-flatpak": "nix-flatpak",
         "nixpkgs": "nixpkgs",
         "noctalia": "noctalia",
-        "silentSDDM": "silentSDDM",
-        "srtcam": "srtcam"
+        "silentSDDM": "silentSDDM"
       }
     },
     "silentSDDM": {
@@ -142,22 +141,6 @@
       "original": {
         "owner": "uiriansan",
         "repo": "SilentSDDM",
-        "type": "github"
-      }
-    },
-    "srtcam": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1779064329,
-        "narHash": "sha256-TCNrRF/580tXt8EJMBzltHYxPPfg17SFu8MqCpmp04c=",
-        "owner": "iwate",
-        "repo": "srtcam",
-        "rev": "e6b4c9acc58d9a4329f22f4949909a6ec788af18",
-        "type": "github"
-      },
-      "original": {
-        "owner": "iwate",
-        "repo": "srtcam",
         "type": "github"
       }
     },

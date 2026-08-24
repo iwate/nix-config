@@ -34,10 +34,6 @@ function Move-Location {
     }
 }
 
-function Listen-SRT {
-    bash ~/nix-config/home-manager/scripts/listen-srt.sh
-}
-
 function Connect-RDP {
     bash ~/nix-config/home-manager/scripts/connect-work-rdp.sh
 }

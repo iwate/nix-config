@@ -6,9 +6,6 @@
 
 let
   sysmonPkg = pkgs.callPackage ../../pkgs/sysmon-for-linux/package.nix { };
-  srtcamPkg = pkgs.callPackage ../../pkgs/srtcam/package.nix {
-    srtcamSrc = inputs.srtcam;
-  };
 in
 
 {
@@ -140,20 +137,7 @@ in
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
     sysmonPkg
-    srtcamPkg
   ];
-
-  environment.etc."srtcam/config.toml".text = ''
-    listen_port = 5000
-    srt_latency_ms = 30
-    latency_profile = "ultra-low"
-    loopback_device = "/dev/video10"
-    frame_width = 1280
-    frame_height = 720
-    fps = 30
-    ffmpeg_analyzeduration_us = 0
-    ffmpeg_probesize_bytes = 32768
-  '';
 
   environment.etc."sysmon/config.xml".text = ''
     <Sysmon schemaversion="4.22">
@@ -215,22 +199,6 @@ in
       printf '%s\0' '${sysmonPkg}/bin/sysmon' '-i' '/opt/sysmon/config.xml' '-service' > /opt/sysmon/argv
       chmod 0600 /opt/sysmon/argc /opt/sysmon/argv
     '';
-  };
-
-  systemd.services.srtcam = {
-    description = "srtcam SRT listener service";
-    wantedBy = [ "multi-user.target" ];
-    wants = [ "network-online.target" ];
-    after = [ "network-online.target" ];
-    serviceConfig = {
-      Type = "simple";
-      User = "iwate";
-      Group = "users";
-      ExecStart = "${srtcamPkg}/bin/srtcam --config /etc/srtcam/config.toml";
-      Restart = "always";
-      RestartSec = 2;
-      Environment = [ "RUST_LOG=info" ];
-    };
   };
 
   # UDisks2 provides privileged mount operations; automount is handled in user session.
@@ -296,7 +264,7 @@ in
 
     # Inbound is denied by default. Keep explicit allow lists empty.
     allowedTCPPorts = [ ];
-    allowedUDPPorts = [ 5000 ];
+    allowedUDPPorts = [ ];
 
   };
 
@@ -309,9 +277,6 @@ in
 
           iifname "lo" accept
           ct state established,related accept
-
-          # Allow inbound UDP on port 5000.
-          udp dport 5000 ct state new accept
 
           # Bambu Lab printer discovery (LAN mode).
           udp dport { 1900, 2021 } ct state new accept
