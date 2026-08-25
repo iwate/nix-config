@@ -145,6 +145,7 @@ in
     GNOME_KEYRING_CONTROL = "/run/user/\${UID}/keyring";
     SSH_AUTH_SOCK = "${config.home.homeDirectory}/.1password/agent.sock";
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+    NIXOS_OZONE_WL  = "1";
   };
 
   xdg.desktopEntries = {
