@@ -25,6 +25,7 @@ in
   # unload kernel modules that are not needed and have had security vulnerabilities in the past.
   boot.extraModprobeConfig = ''
     options v4l2loopback exclusive_caps=1 max_buffers=2 video_nr=10 card_label="Virtual Camera"
+    options btusb enable_autosuspend=0
     install esp4 ${pkgs.coreutils}/bin/false
     install esp6 ${pkgs.coreutils}/bin/false
     install rxrpc ${pkgs.coreutils}/bin/false
