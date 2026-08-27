@@ -118,6 +118,7 @@ in
   home.file.".config/fcitx5/profile".source = ./dotfiles/fcitx5-profile;
   home.file.".config/fcitx5/profile".force = true;
   home.file.".config/mozc/config1.db".source = ./dotfiles/mozc-config1.db;
+  home.file.".config/mozc/config1.db".force = true;
   home.file.".config/niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/niri-config.kdl";
   home.file.".config/niri/config.kdl".force = true;
   home.file.".config/noctalia/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/noctalia-settings.json";
