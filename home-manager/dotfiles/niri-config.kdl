@@ -33,7 +33,7 @@ input {
     // Omitting settings disables them, or leaves them at their default values.
     // All commented-out settings here are examples, not defaults.
     touchpad {
-        // off
+        // lid-toggle
         tap
         // dwt
         // dwtp
@@ -44,6 +44,14 @@ input {
         // accel-profile "flat"
         // scroll-method "two-finger"
         // disabled-on-external-mouse
+    }
+
+    touch {
+        // lid-toggle
+    }
+
+    tablet {
+        // lid-toggle
     }
 
     mouse {
@@ -80,6 +88,7 @@ input {
 // https://yalter.github.io/niri/Configuration:-Outputs
 // Remember to uncomment the node by removing "/-"!
 output "eDP-1" {
+    // lid-toggle
     // Uncomment this line to disable this output.
     // off
 
@@ -114,6 +123,15 @@ output "DP-5" {
     mode "3840x2160@59.997"
     scale 1.25
     transform "normal"
+}
+
+switch-events {
+    lid-close {
+        spawn "sh" "-c" "niri msg output eDP-1 off; sed --follow-symlinks -i 's|// lid-toggle|// lid-toggle|' ~/.config/niri/config.kdl; notify-send -u normal 'Turn off laptop devices'";
+    }
+    lid-open {
+        spawn "sh" "-c" "niri msg output eDP-1 on; sed --follow-symlinks -i 's|// lid-toggle|// lid-toggle|' ~/.config/niri/config.kdl; notify-send -u normal 'Turn on laptop devices'";
+    }
 }
 
 // Settings that influence how windows are positioned and sized.
