@@ -127,10 +127,10 @@ output "DP-5" {
 
 switch-events {
     lid-close {
-        spawn "sh" "-c" "niri msg output eDP-1 off; sed --follow-symlinks -i 's|// lid-toggle|// lid-toggle|' ~/.config/niri/config.kdl; notify-send -u normal 'Turn off laptop devices'";
+        spawn "sh" "-c" "niri msg output eDP-1 off; sed --follow-symlinks -i -E 's|^([[:space:]]*)// lid-toggle[[:space:]]*$|\\1off // lid-toggle|' ~/.config/niri/config.kdl; notify-send -u normal 'Turn off laptop devices'";
     }
     lid-open {
-        spawn "sh" "-c" "niri msg output eDP-1 on; sed --follow-symlinks -i 's|// lid-toggle|// lid-toggle|' ~/.config/niri/config.kdl; notify-send -u normal 'Turn on laptop devices'";
+        spawn "sh" "-c" "niri msg output eDP-1 on; sed --follow-symlinks -i -E 's|^([[:space:]]*)off // lid-toggle[[:space:]]*$|\\1// lid-toggle|' ~/.config/niri/config.kdl; notify-send -u normal 'Turn on laptop devices'";
     }
 }
 
