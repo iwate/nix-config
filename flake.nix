@@ -42,9 +42,12 @@
     genzoPackage = pkgs.callPackage ./pkgs/genzo/package.nix {
       inherit (inputs) genzo;
     };
+
+    lateCliPackage = pkgs.callPackage ./pkgs/late-cli/package.nix { };
   in {
     packages.${system} = {
       genzo = genzoPackage;
+      late-cli = lateCliPackage;
       default = genzoPackage;
     };
 
@@ -52,6 +55,10 @@
       genzo = {
         type = "app";
         program = "${genzoPackage}/bin/genzo";
+      };
+      late-cli = {
+        type = "app";
+        program = "${lateCliPackage}/bin/late";
       };
       default = {
         type = "app";
