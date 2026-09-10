@@ -48,7 +48,6 @@
     packages.${system} = {
       genzo = genzoPackage;
       late-cli = lateCliPackage;
-      default = genzoPackage;
     };
 
     apps.${system} = {
@@ -59,10 +58,6 @@
       late-cli = {
         type = "app";
         program = "${lateCliPackage}/bin/late";
-      };
-      default = {
-        type = "app";
-        program = "${genzoPackage}/bin/genzo";
       };
     };
 
