@@ -4,6 +4,7 @@ let
   genzoPkg = pkgs.callPackage ../pkgs/genzo/package.nix {
     genzo = inputs.genzo;
   };
+  lateCliPkg = pkgs.callPackage ../pkgs/late-cli/package.nix { };
 in
 {
   imports = [
@@ -18,6 +19,7 @@ in
 
   home.packages = with pkgs; [
     genzoPkg
+    lateCliPkg
     powershell
     google-chrome
     kitty

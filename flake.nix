@@ -38,29 +38,7 @@
     pkgs = import nixpkgs {
       inherit system;
     };
-
-    genzoPackage = pkgs.callPackage ./pkgs/genzo/package.nix {
-      inherit (inputs) genzo;
-    };
-
-    lateCliPackage = pkgs.callPackage ./pkgs/late-cli/package.nix { };
   in {
-    packages.${system} = {
-      genzo = genzoPackage;
-      late-cli = lateCliPackage;
-    };
-
-    apps.${system} = {
-      genzo = {
-        type = "app";
-        program = "${genzoPackage}/bin/genzo";
-      };
-      late-cli = {
-        type = "app";
-        program = "${lateCliPackage}/bin/late";
-      };
-    };
-
     nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
       system = system;
       specialArgs = { inherit inputs; };
