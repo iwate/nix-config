@@ -26,7 +26,7 @@ let title = doc.querySelector("h1")?.innerText;
 
 if (!title) {
   title = basename(input_file_name).replace(/\.[^/.]+$/, "");
-  body = `${title}\n${body}`;
+  body = `<h1>${title}</h1>\n${body}`;
 }
 
 body = await transformImageTag(body);
