@@ -1,11 +1,9 @@
 FROM node:24-bookworm-slim
 
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends bash ca-certificates git ripgrep \
+  && apt-get install -y --no-install-recommends bash ca-certificates git ripgrep fd-find\
   && rm -rf /var/lib/apt/lists/*
 RUN npm install -g --ignore-scripts @earendil-works/pi-coding-agent
-RUN pi install npm:pi-exa
-RUN pi install 
 
 WORKDIR /workspace
 ENTRYPOINT ["pi"]
