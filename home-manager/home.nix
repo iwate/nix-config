@@ -138,6 +138,7 @@ in
       connect-work-rdp = "${config.home.homeDirectory}/nix-config/home-manager/scripts/connect-work-rdp.sh";
       md2blog = "${config.home.homeDirectory}/nix-config/home-manager/scripts/blog/md2blog.sh";
       flake-diff-urls = "${config.home.homeDirectory}/nix-config/home-manager/scripts/flake-diff-urls.sh";
+      pi = "${config.home.homeDirectory}/nix-config/home-manager/scripts/pi.sh";
     };
   };
 
