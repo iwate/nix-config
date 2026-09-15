@@ -1,6 +1,10 @@
 { config, pkgs, inputs, ... }:
 let 
   dotfilesPath = "${config.home.homeDirectory}/nix-config/home-manager/dotfiles"; 
+  pkgsUnstable = import inputs.nixpkgs-unstable {
+    system = pkgs.stdenv.hostPlatform.system;
+    config.allowUnfree = true;
+  };
   genzoPkg = pkgs.callPackage ../pkgs/genzo/package.nix {
     genzo = inputs.genzo;
   };
@@ -25,7 +29,7 @@ in
     xwayland-satellite
     networkmanagerapplet
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
-	  vscode
+    pkgsUnstable.vscode
     git
     slack
     obsidian
@@ -46,6 +50,7 @@ in
 
   services.ollama = {
     enable = true;
+    package = pkgsUnstable.ollama;
     acceleration = "rocm";
     environmentVariables = {
       OLLAMA_CONTEXT_LENGTH = "262144";
