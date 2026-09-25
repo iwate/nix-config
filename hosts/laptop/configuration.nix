@@ -132,6 +132,18 @@ in
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Lemonade downloads generic Linux ROCm backends at runtime.
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      libdrm
+      openssl
+      stdenv.cc.cc.lib
+      zlib
+      zstd
+    ];
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [

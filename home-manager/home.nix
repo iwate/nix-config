@@ -8,6 +8,7 @@ let
   genzoPkg = pkgs.callPackage ../pkgs/genzo/package.nix {
     genzo = inputs.genzo;
   };
+  lemonadePkg = pkgs.callPackage ../pkgs/lemonade/package.nix { };
 in
 {
   imports = [
@@ -22,6 +23,7 @@ in
 
   home.packages = with pkgs; [
     genzoPkg
+    lemonadePkg
     powershell
     google-chrome
     kitty
@@ -176,6 +178,28 @@ in
         "DBUS_SESSION_BUS_ADDRESS=unix:path=%t/bus"
       ];
       ExecStart = "${config.home.homeDirectory}/nix-config/check-updates.sh";
+    };
+  };
+
+  systemd.user.services.lemonade-server = {
+    Unit = {
+      Description = "Lemonade local AI server";
+      After = [ "network-online.target" ];
+      Wants = [ "network-online.target" ];
+    };
+    Service = {
+      Type = "simple";
+      Environment = [
+        "NIX_LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath [ pkgs.libdrm pkgs.openssl pkgs.stdenv.cc.cc.lib pkgs.zlib pkgs.zstd ]}"
+      ];
+      ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p %h/.local/share/lemonade";
+      ExecStart = "${lemonadePkg}/bin/lemond %h/.local/share/lemonade";
+      Restart = "on-failure";
+      RestartSec = 5;
+      LimitMEMLOCK = "infinity";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
     };
   };
 
