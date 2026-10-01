@@ -9,4 +9,4 @@ docker run --rm -it \
   -v "$PWD:/workspace" \
   -v pi-agent-home:/root/.pi/agent \
   --network=host \
-  pi-sandbox
+  wrap

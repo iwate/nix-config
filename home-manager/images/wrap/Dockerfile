@@ -13,10 +13,14 @@ RUN apt-get update \
     python3-venv \
     ripgrep \
     nano \
+    unzip \
   && rm -rf /var/lib/apt/lists/*
 
 # Install uv from official binary
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+# Install just from official binary
+COPY --from=ghcr.io/casey/just:latest /just /usr/local/bin/
 
 # Environment variables for headless chromium / puppeteer / playwright
 ENV CHROME_BIN=/usr/bin/chromium \
@@ -30,5 +34,7 @@ ENV CHROME_BIN=/usr/bin/chromium \
 
 RUN npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 
+RUN curl -fsSL https://bun.sh/install | bash
+
 WORKDIR /workspace
-ENTRYPOINT ["pi"]
+ENTRYPOINT ["bash"]

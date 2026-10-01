@@ -51,13 +51,13 @@ function Publish-Blog {
     popd
 }
 
-function Enter-Pi {
-    bash ~/nix-config/home-manager/scripts/pi.sh
+function Enter-Sandbox {
+    bash ~/nix-config/home-manager/scripts/wrap.sh
 }
 
 Remove-Item alias:cd
 Set-Alias cd Move-Location
-Set-Alias pi Enter-Pi
+Set-Alias wrap Enter-Sandbox
 
 ~/.local/bin/oh-my-posh --init --shell pwsh | Invoke-Expression
 
