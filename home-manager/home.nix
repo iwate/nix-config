@@ -48,6 +48,7 @@ in
     awscli2
     kicad
     fastfetch
+    firefox
   ];
 
   gtk = {
