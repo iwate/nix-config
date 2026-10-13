@@ -7,6 +7,7 @@ RUN apt-get update \
     chromium \
     curl \
     fd-find \
+    file \
     git \
     python3 \
     python3-pip \
