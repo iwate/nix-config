@@ -25,6 +25,7 @@ COPY --from=ghcr.io/casey/just:latest /just /usr/local/bin/
 # Environment variables for headless chromium / puppeteer / playwright
 ENV CHROME_BIN=/usr/bin/chromium \
     CHROME_PATH=/usr/bin/chromium \
+    PATH="/root/.local/bin:${PATH}" \
     PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium \
     PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 \
