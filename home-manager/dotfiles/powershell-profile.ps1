@@ -55,9 +55,14 @@ function Enter-Sandbox {
     bash ~/nix-config/home-manager/scripts/wrap.sh
 }
 
+function Enter-Wrap {
+    bash ~/nix-config/home-manager/scripts/ew.sh
+}
+
 Remove-Item alias:cd
 Set-Alias cd Move-Location
 Set-Alias wrap Enter-Sandbox
+Set-Alias ew Enter-Wrap
 
 ~/.local/bin/oh-my-posh --init --shell pwsh | Invoke-Expression
 

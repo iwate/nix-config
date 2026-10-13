@@ -40,6 +40,7 @@ in
     libnotify
     jq
     ripgrep
+    fzf
     bat
     fd
     (ffmpeg-full.override {config.rocmSupport=true;})
@@ -136,6 +137,7 @@ in
       md2blog = "${config.home.homeDirectory}/nix-config/home-manager/scripts/blog/md2blog.sh";
       flake-diff-urls = "${config.home.homeDirectory}/nix-config/home-manager/scripts/flake-diff-urls.sh";
       wrap = "${config.home.homeDirectory}/nix-config/home-manager/scripts/wrap.sh";
+      ew = "${config.home.homeDirectory}/nix-config/home-manager/scripts/ew.sh";
     };
   };
 
