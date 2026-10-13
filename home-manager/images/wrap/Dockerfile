@@ -12,7 +12,7 @@ RUN apt-get update \
     python3-pip \
     python3-venv \
     ripgrep \
-    nano \
+    micro \
     unzip \
   && rm -rf /var/lib/apt/lists/*
 
@@ -32,9 +32,11 @@ ENV CHROME_BIN=/usr/bin/chromium \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8
 
-RUN npm install -g --ignore-scripts @earendil-works/pi-coding-agent
+RUN npm install -g --ignore-scripts @earendil-works/pi-coding-agent@1.2.0
 
 RUN curl -fsSL https://bun.sh/install | bash
+
+RUN uv tool install yazi-bin
 
 WORKDIR /workspace
 ENTRYPOINT ["bash"]
