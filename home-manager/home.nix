@@ -9,6 +9,29 @@ let
     genzo = inputs.genzo;
   };
   lemonadePkg = pkgs.callPackage ../pkgs/lemonade/package.nix { };
+  handyPkg = pkgs.callPackage ../pkgs/handy/package.nix { };
+  handyNiriPastePkg = pkgs.writeShellApplication {
+    name = "handy-niri-paste";
+    runtimeInputs = [ pkgs.wl-clipboard pkgs.wtype pkgs.niri pkgs.jq ];
+    text = ''
+      if [[ $# -ne 1 ]]; then
+        printf 'Expected transcription text as one argument\n' >&2
+        exit 2
+      fi
+
+      printf '%s' "$1" | wl-copy
+
+      app_id="$(niri msg --json focused-window | jq -r '.app_id // ""')"
+      case "$app_id" in
+        kitty|Alacritty|alacritty|foot|footclient|org.wezfurlong.wezterm|com.mitchellh.ghostty|org.gnome.Terminal|org.gnome.Console|org.kde.konsole|konsole|xterm|XTerm)
+          wtype -M ctrl -M shift -k v -m shift -m ctrl
+          ;;
+        *)
+          wtype -M ctrl -k v -m ctrl
+          ;;
+      esac
+    '';
+  };
 in
 {
   imports = [
@@ -24,6 +47,8 @@ in
   home.packages = with pkgs; [
     genzoPkg
     lemonadePkg
+    handyPkg
+    handyNiriPastePkg
     powershell
     google-chrome
     kitty
@@ -107,6 +132,7 @@ in
 
   home.file.".config/git/config".source = ./dotfiles/.gitconfig;
   home.file.".config/git/config".force = true;
+  home.file.".local/bin/handy-niri-paste".source = "${handyNiriPastePkg}/bin/handy-niri-paste";
   home.file.".config/git/allowed_signers".source = ./dotfiles/git-allowed-signers;
   home.file.".config/git/allowed_signers".force = true;
   home.file.".ssh/config".source = ./dotfiles/ssh-config;
@@ -125,6 +151,8 @@ in
   home.file.".config/kitty/kitty.conf".force = true;
   home.file.".config/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/vscode-settings.json";
   home.file.".config/Code/User/settings.json".force = true;
+  home.file.".config/Code/User/keybindings.json".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/vscode-keybindings.json";
+  home.file.".config/Code/User/keybindings.json".force = true;
   home.file.".config/powershell/profile.ps1".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/powershell-profile.ps1";
   home.file.".config/powershell/profile.ps1".force = true;
 
@@ -150,6 +178,13 @@ in
   };
 
   xdg.desktopEntries = {
+    handy = {
+      name = "Handy";
+      genericName = "Speech to text";
+      exec = "${handyPkg}/bin/handy";
+      terminal = false;
+      categories = [ "Utility" "AudioVideo" ];
+    };
     rdp-work = {
       name = "RDP(work)";
       genericName = "Connect to workstation";
@@ -158,6 +193,16 @@ in
       categories = [ "Network" "RemoteAccess" ];
     };
   };
+
+  xdg.configFile."autostart/handy.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=Handy
+    GenericName=Speech to text
+    Exec=${handyPkg}/bin/handy --start-hidden
+    Terminal=false
+    X-GNOME-Autostart-enabled=true
+  '';
 
   systemd.user.services.check-updates = {
     Unit = {
