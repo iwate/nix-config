@@ -21,5 +21,15 @@
         "key": "ctrl+v",
         "command": "workbench.action.terminal.paste",
         "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+v",
+        "command": "workbench.action.terminal.paste",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+v",
+        "command": "editor.action.clipboardPasteAction",
+        "when": "editorTextFocus"
     }
 ]

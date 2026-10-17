@@ -23,6 +23,9 @@ let
 
       app_id="$(niri msg --json focused-window | jq -r '.app_id // ""')"
       case "$app_id" in
+        code)
+          wtype -M ctrl -M shift -k v -m shift -m ctrl
+          ;;
         kitty|Alacritty|alacritty|foot|footclient|org.wezfurlong.wezterm|com.mitchellh.ghostty|org.gnome.Terminal|org.gnome.Console|org.kde.konsole|konsole|xterm|XTerm)
           wtype -M ctrl -M shift -k v -m shift -m ctrl
           ;;
