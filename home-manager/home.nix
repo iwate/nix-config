@@ -243,6 +243,37 @@ in
     };
   };
 
+  systemd.user.services.gitea = {
+    Unit = {
+      Description = "Gitea rootless Podman service";
+      After = [ "network-online.target" ];
+      Wants = [ "network-online.target" ];
+    };
+    Service = {
+      Type = "simple";
+      ExecStartPre = "${pkgs.podman}/bin/podman network create --ignore gitea-net";
+      ExecStart = ''
+        ${pkgs.podman}/bin/podman run --rm --name gitea \
+          --network gitea-net --network-alias gitea \
+          --publish 127.0.0.1:3030:3000 \
+          --volume gitea-data:/data:U \
+          --env USER_UID=1000 \
+          --env USER_GID=1000 \
+          --env GITEA__database__DB_TYPE=sqlite3 \
+          --env GITEA__database__PATH=/data/gitea/gitea.db \
+          --env GITEA__server__ROOT_URL=http://localhost:3030/ \
+          --env GITEA__server__DISABLE_SSH=true \
+          docker.gitea.com/gitea:28.2.0
+      '';
+      ExecStop = "${pkgs.podman}/bin/podman stop --ignore --time 10 gitea";
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+  };
+
   systemd.user.services.check-audits = {
     Unit = {
       Description = "Run Sysmon security rule audits";

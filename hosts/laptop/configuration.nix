@@ -118,6 +118,7 @@ in
   users.users.iwate = {
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" "podman" "video" ];
+    linger = true;
   };
 
   # Allow flakes
