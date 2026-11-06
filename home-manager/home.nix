@@ -166,6 +166,7 @@ in
       export-sysmon-log = "${config.home.homeDirectory}/nix-config/home-manager/scripts/export-sysmon-log.sh";
       connect-work-rdp = "${config.home.homeDirectory}/nix-config/home-manager/scripts/connect-work-rdp.sh";
       md2blog = "${config.home.homeDirectory}/nix-config/home-manager/scripts/blog/md2blog.sh";
+      translate = "deno run --allow-read --allow-write --allow-net=127.0.0.1:13305 --allow-env=LEMONADE_MODEL,LEMONADE_BASE_URL ${config.home.homeDirectory}/nix-config/home-manager/scripts/translate.ts";
       flake-diff-urls = "${config.home.homeDirectory}/nix-config/home-manager/scripts/flake-diff-urls.sh";
       wrap = "${config.home.homeDirectory}/nix-config/home-manager/scripts/wrap.sh";
       ew = "${config.home.homeDirectory}/nix-config/home-manager/scripts/ew.sh";

@@ -51,6 +51,10 @@ function Publish-Blog {
     popd
 }
 
+function Translate-File {
+    deno run --allow-read --allow-write --allow-net=127.0.0.1:13305 --allow-env=LEMONADE_MODEL,LEMONADE_BASE_URL "$HOME/nix-config/home-manager/scripts/translate.ts" @args
+}
+
 function Enter-Sandbox {
     bash ~/nix-config/home-manager/scripts/wrap.sh
 }
@@ -63,6 +67,7 @@ Remove-Item alias:cd
 Set-Alias cd Move-Location
 Set-Alias wrap Enter-Sandbox
 Set-Alias ew Enter-Wrap
+Set-Alias translate Translate-File
 
 ~/.local/bin/oh-my-posh --init --shell pwsh | Invoke-Expression
 
