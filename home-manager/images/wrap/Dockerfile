@@ -34,11 +34,13 @@ ENV CHROME_BIN=/usr/bin/chromium \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8
 
-RUN npm install -g --ignore-scripts @earendil-works/pi-coding-agent@1.5.0
+RUN npm install -g --ignore-scripts @earendil-works/pi-coding-agent@1.5.2
 
 RUN curl -fsSL https://bun.sh/install | bash
 
 RUN uv tool install yazi-bin
+
+RUN curl -fsSL https://get.pnpm.io/install.sh | sh -
 
 WORKDIR /workspace
 ENTRYPOINT ["bash"]
