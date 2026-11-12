@@ -9,6 +9,7 @@ RUN apt-get update \
     fd-find \
     file \
     git \
+    libatomic1 \
     python3 \
     python3-pip \
     python3-venv \
@@ -35,12 +36,15 @@ ENV CHROME_BIN=/usr/bin/chromium \
     LC_ALL=C.UTF-8
 
 RUN npm install -g --ignore-scripts @earendil-works/pi-coding-agent@1.5.2
+RUN npm install -g --ignore-scripts wrangler
+
+ENV PNPM_HOME="/root/.local/share/pnpm"
+ENV PATH="$PNPM_HOME:$PNPM_HOME/bin:$PATH"
+RUN curl -fsSL https://get.pnpm.io/install.sh | PNPM_NO_MODIFY_PATH=true sh -
 
 RUN curl -fsSL https://bun.sh/install | bash
 
 RUN uv tool install yazi-bin
-
-RUN curl -fsSL https://get.pnpm.io/install.sh | sh -
 
 WORKDIR /workspace
 ENTRYPOINT ["bash"]
